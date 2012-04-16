@@ -1,16 +1,10 @@
-// Define individual colors:
-@lightBlue:	#91b7cc;
-@orange:	#febf02;
-@darkBlue:	#25253d;
-
-// Assign individual colors to stylesheet-wide instructions:
-@lightColor:        @lightBlue;
-@darkColor:         @darkBlue;
-@contrastColor:     @orange;
-@dropShadowColor:   @lightBlue;
-
-// Import resy styles:
-@import "resy.less";
+@lightColor:        #91b7cc;    // light blue
+@darkColor:         #25253d;    // dark blue
+@contrastColor:     #febf02;    // orange
+@dropShadowColor:   @lightColor;
 
 // Import master file:
 @import "verekia.less";
+
+// Import resy styles:
+@import "resy.less";

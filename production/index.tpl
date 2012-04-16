@@ -7,23 +7,13 @@
 <head>
     <meta charset="{$head_charset}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
     <title>{$blogTitle}</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
+    {serendipity_hookPlugin hook="frontend_header"}
     <meta name="Powered-By" content="Serendipity v.{$head_version}">
 
     <meta name="viewport" content="width=device-width">
 
-    {if $template_option.useless == 'true'}
-        <link rel="stylesheet/less" type="text/css" href="{$serendipityBaseURL}templates/{$template}/less/style.less">
-        <script src="{$serendipityBaseURL}templates/{$template}/less/less-1.3.0.min.js" type="text/javascript"></script>
-        {if $template_option.liveless == 'true'}
-            <script type="text/javascript">less.watch()</script>
-        {/if}
-    {else}
-        <link rel="stylesheet" href="{$head_link_stylesheet}">
-    {/if}
+    <link rel="stylesheet" href="{$head_link_stylesheet}">
 
     <link rel="alternate" type="application/rss+xml" title="{$blogTitle} RSS feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/index.rss2" />
     <link rel="alternate" type="application/x.atom+xml" title="{$blogTitle} Atom feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/atom.xml" />
@@ -31,8 +21,6 @@
     {if $entry_id}
         <link rel="pingback" href="{$serendipityBaseURL}comment.php?type=pingback&amp;entry_id={$entry_id}" />
     {/if}
-
-    {serendipity_hookPlugin hook="frontend_header"}
 </head>
 <body>
 <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
@@ -49,7 +37,15 @@
                 <h2><a class="homelink2" href="{$serendipityBaseURL}"
                     >{$head_subtitle|@default:$blogDescription}</a></h2>
             </div>
-            <nav></nav>
+            {if $template_option.navigation == 'true'}
+                <nav>
+                    <ul>
+                        <li><a href="#">Link 1</a></li>
+                        <li><a href="#">Link 2</a></li>
+                        <li><a href="#">Link 3</a></li>
+                    </ul>
+                </nav>
+            {/if}
         </header>
     </div>
     <div id="main-container">
@@ -74,13 +70,12 @@
         </div> <!-- #main -->
     </div> <!-- #main-container -->
 
-    <div id="footer-container">
-        <footer class="wrapper">
-        </footer>
-    </div>
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
+    {if $template_option.footer == 'true'}
+        <div id="footer-container">
+            <footer class="wrapper">
+            </footer>
+        </div>
+    {/if}
 
     <script src="js/script.js"></script>
 {/if} <!-- endif raw mode -->
