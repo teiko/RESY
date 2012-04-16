@@ -8,8 +8,6 @@ RESY is based upon the Responsive Template (RT) by Jonathan Verrecchia, aka Vere
 RESY extends the RT not only by adapting the look & feel of S9Y, but also by providing the underlying Stylesheet in LESS-Syntax. With LESS, a Webdesigner is able to create his Stylesheets with less instructions -- hence the name! 
 When using LESS, the colors of the template can easily get modified by editing the file less/style.less; if you are comfortable with the overall layout of the template, you can leave all other files untouched.
 
-This template can be seen live in action at http://www.codeless.at/blog
-
 
 # Compiling:
 
