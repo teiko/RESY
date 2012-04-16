@@ -9,6 +9,11 @@ RESY extends the RT not only by adapting the look & feel of S9Y, but also by pro
 When using LESS, the colors of the template can easily get modified by editing the file less/style.less; if you are comfortable with the overall layout of the template, you can leave all other files untouched.
 
 
+# Usage
+
+To make use of the template within S9Y, simply name the folder "production" to your needs and copy it to your S9Y installation (templates-folder!). You're done!
+
+
 # Compiling:
 
 Please have a look at the Makefile.
