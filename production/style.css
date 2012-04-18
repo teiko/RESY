@@ -627,3 +627,9 @@ h6 {
   background: #91b7cc;
   font-weight: bold;
 }
+/* Responsive images: */
+img,
+obj {
+  max-width: 100%;
+  height: auto;
+}

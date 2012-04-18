@@ -10,16 +10,13 @@
     <title>{$blogTitle}</title>
     {serendipity_hookPlugin hook="frontend_header"}
     <meta name="Powered-By" content="Serendipity v.{$head_version}">
-
     <meta name="viewport" content="width=device-width">
-
     <link rel="stylesheet" href="{$head_link_stylesheet}">
-
+    <script src="{serendipity_getFile file="js/modernizr-2.5.3.min.js"}"></script>
     <link rel="alternate" type="application/rss+xml" title="{$blogTitle} RSS feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/index.rss2" />
     <link rel="alternate" type="application/x.atom+xml" title="{$blogTitle} Atom feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/atom.xml" />
-
     {if $entry_id}
-        <link rel="pingback" href="{$serendipityBaseURL}comment.php?type=pingback&amp;entry_id={$entry_id}" />
+    <link rel="pingback" href="{$serendipityBaseURL}comment.php?type=pingback&amp;entry_id={$entry_id}" />
     {/if}
 </head>
 <body>
@@ -50,12 +47,6 @@
     </div>
     <div id="main-container">
         <div id="main" class="wrapper clearfix">
-
-            {if $leftSidebarElements > 0}
-                <aside style="float:left;">
-                    {serendipity_printSidebar side="left"}
-                </aside>
-            {/if}
 
             <article>
                 {$CONTENT}

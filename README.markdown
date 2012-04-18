@@ -14,18 +14,12 @@ When using LESS, the colors of the template can easily get modified by editing t
 To make use of the template within S9Y, simply name the folder "production" to your needs and copy it to your S9Y installation (templates-folder!). You're done!
 
 
-# Compiling:
+# Compiling
 
 Please have a look at the Makefile.
 
 
-# Notes:
-
-  - The template is not able to display images and other media in responsive way
-  - RESY makes use of HTML5 elements but doesn't provide a way to let older browsers know how to handle this (no HTML5 shiv!)
-
-
-# Resources:
+# Resources
 
   - [Serendipity](http://www.s9y.org/)
   - [Responsive Template by Verekia](http://www.initializr.com/try)
@@ -33,13 +27,17 @@ Please have a look at the Makefile.
   - [LESS](http://lesscss.org/)
   - [cloudhead - programmer of LESS](http://cloudhead.io/)
   - [HTML5 Boilerplate -- h5bp](http://www.html5boilerplate.com/)
+  - [modernizr.com](http://www.modernizr.com/)
+
+
+# Notes
+
+Several plugins won't work with RESY yet; please test for yourself and report back here on github.
 
 
 # Thanks
 
-Besides Verekia, who put the code of RT as Public Domain, I want to thank Gatis Tomsons from the ruby-forum and Shannon Nelson from stackoverflow.com for their notes about automatic screenshot creation.
-Also, my thanks go to the large group of HTML5Boilerplate (h5bp) developers and to Alexis Sellier for his LESS stylesheet language.
-Last but not least a big thank you to the S9Y developers and the testers of this template.
+Thanks goes out to all developers in the FOSS-scene!
 
 
 # License
