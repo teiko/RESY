@@ -12,11 +12,14 @@
     <meta name="Powered-By" content="Serendipity v.{$head_version}">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="{$head_link_stylesheet}">
+    {if $template_option.colorset != 'default'}
+        <link rel="stylesheet" href="{$serendipityHTTPPath}templates/{$template}/colorset_{$template_option.colorset}.css">
+    {/if}
     <script src="{serendipity_getFile file="js/modernizr-2.5.3.min.js"}"></script>
     <link rel="alternate" type="application/rss+xml" title="{$blogTitle} RSS feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/index.rss2" />
     <link rel="alternate" type="application/x.atom+xml" title="{$blogTitle} Atom feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/atom.xml" />
     {if $entry_id}
-    <link rel="pingback" href="{$serendipityBaseURL}comment.php?type=pingback&amp;entry_id={$entry_id}" />
+        <link rel="pingback" href="{$serendipityBaseURL}comment.php?type=pingback&amp;entry_id={$entry_id}" />
     {/if}
 </head>
 <body>
@@ -48,15 +51,24 @@
     <div id="main-container">
         <div id="main" class="wrapper clearfix">
 
-            <article>
+            
+            <aside 
+                {if $template_option.sidebar_position == 'left'}
+                    class="left"
+                {/if}>
+                    {if $leftSidebarElements > 0}
+                        {serendipity_printSidebar side="left"}
+                    {/if}
+                    {if $rightSidebarElements > 0}
+                        {serendipity_printSidebar side="right"}
+                    {/if}
+            </aside>
+            <article 
+                {if $template_option.sidebar_position == 'left'}
+                    class="right"
+                {/if}>
                 {$CONTENT}
             </article>
-
-            {if $rightSidebarElements > 0}
-                <aside>
-                    {serendipity_printSidebar side="right"}
-                </aside>
-            {/if}
 
         </div> <!-- #main -->
     </div> <!-- #main-container -->
@@ -68,7 +80,6 @@
         </div>
     {/if}
 
-    <script src="js/script.js"></script>
 {/if} <!-- endif raw mode -->
 
 {$raw_data}

@@ -1,0 +1,61 @@
+// The base LESS file with the default colorset
+
+// Default colorset:
+@lightColor: 	#7fbf00;
+@darkColor: 	#008000;
+@contrastColor: #ff0;
+
+// Import master file:
+@import "verekia.less";
+
+#main aside.left{float:left;}
+#main article.right{float:right;}
+
+// Overall RESY styles:
+a {
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
+}
+
+h1,h2,h3,h4,h5,h6 { font-family: Georgia, serif; }
+
+.serendipity_entry { margin-bottom: 3em; }
+
+.serendipity_section_trackbacks {
+    font-weight: bold;
+    border-bottom: 1px solid;
+}
+
+.serendipity_sideNavigation,
+.serendipity_commentsTitle {
+    font-weight: bold;
+}
+
+.serendipity_comment {
+    margin-bottom: 1em;
+}
+
+.serendipity_comment_source {
+    font-size: smaller;
+    border-top: 1px dashed;
+}
+
+.serendipity_entryFooter {
+    border: 1px solid;
+    padding: 0.5em;
+    margin: 1em 0;
+    font-size: smaller;
+}
+
+.serendipity_entry_extend {
+    font-style: italic;
+    font-weight: bold;
+}
+
+// Responsive images:
+img,obj {
+    max-width: 100%;
+    height: auto;
+}
+
+@import "coloring.less";

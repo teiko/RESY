@@ -13,8 +13,6 @@ $template_config = array(
         'default'       => 'default',
         'select_values' => array(
             # Colorsets:
-            'serendipity' => RESY_COLORSET_SERENDIPITY,
-            'lime_and_melon_salad' => RESY_COLORSET_LIME_AND_MELON_SALAD,
             'default' => RESY_COLORSET_DEFAULT)
     ),
 

@@ -1,49 +1,76 @@
 # Makefile for creation of several RESY-components
 #
 # Author: Manuel Hiptmair
-# Created on: 2012-04-14
 # Compiled on: Ubuntu Linux 10.04 the lucid lynx
 
 
 # To compile the LESS-files into a CSS-file, a LESS-compiler is needed.
 # Be aware that those compilers provide different features and probably
 # different syntax!
-LESSCOMPILER 	= ~/node_modules/less/bin/lessc
-
-# iconv is used to convert UTF-8 language files into the appropriate
-# codepages for S9Y installations
-#ICONV 		= /usr/bin/iconv
+LESSCOMPILER 	= ~/node_modules/less/bin/lessc --compress
 
 # wmctrl makes it possible to interact with the X window manager.
 # In this file, wmctrl is used to open up a webbrowser and to resize it.
 # This allows the creation of standardized screenshots.
-WMCTRL_SEARCH 	= Firefox
+WMCTRL_SEARCH 	= "John Doe"
 
 # The webbrowser of choice which is needed to render the website
 # for an automatic screenshot:
-WEBBROWSER 	= firefox
+WEBBROWSER 	= /usr/bin/firefox
+
+# Command for removing files, only if they exist
+REMOVE 		= /bin/rm -f
+
+# Path to temporary folder
+TEMP 		= /tmp
+
+# Absolute path to current directory
+PROJECT_DIR 	= $(shell pwd)
 
 # Further software required to run this file:
 # * imagemagick: to make a screenshot and edit it
+# * awk: to extract the colors out of colorsets.csv
 
+all: 		colorsets basestyle langfiles preview
+		@echo "Done"
 
-static: 	style langfiles preview
-		@echo "Make all"
+langfiles: 	languages/de languages/en
+		@echo "Remove existant language files in the production folder..."
+		${REMOVE} production/lang_* production/UTF-8/lang_* languages/*.php
+		@echo "Create PHP files for languages..."
+		languages := de en
+		$(foreach language,$(languages),$(sh ))
+##		# Best try to create php-language files with awk:
+##		# find languages/lang* -execdir sh -vc "/usr/bin/awk '{ sub(/=/, \"\\\", \\\"\");print \"@define(\\\"\" $$$0 \"\\\", \\\"\\\");\" }' {}" \;
+#		find languages/* -execdir sh -vc 'cat {} | /bin/sed -e "s/^/@define(\"/g" -e "s/=/\", \"/g" -e "s/$$/\");/g" > lang_{}.inc.php' \;
+#		@echo "Move PHP language files..."
+#		mv languages/*.php production/UTF-8/
+#		@echo "Generate language files for other codepages..."
+##		#find production/UTF-8/lang* -execdir sh -c '/usr/bin/iconv --from-code UTF-8 --to-code X {} --output {}' \;
+##		#/usr/bin/iconv --from-code UTF-8 --to-code ASCII UTF-8/lang_en.inc.php --output lang_en.inc.php
 
-style: 		less/style.less less/resy.less less/verekia.less
+colorsets: 	colorsets.csv
+		@echo "Remove temporary files..."
+		${REMOVE} ${TEMP}/colorset* ${TEMP}/resy_config ${TEMP}/coloring.less
+		@echo "Removing colorset CSS files in production folder..."
+		${REMOVE} production/colorset*
+		@echo "Generating colorset LESS-files..."
+		/usr/bin/awk --assign=temporary_folder=${TEMP} -f setup_colorsets.awk colorsets.csv
+		@echo "Generating link to coloring.less file -- panic mode"
+		ln -s ${PROJECT_DIR}/less/coloring.less ${TEMP}/coloring.less
+		@echo "Generating colorset CSS-files..."
+		find ${TEMP}/colorset* -execdir sh -c '${LESSCOMPILER} {} ${PROJECT_DIR}/production/{}.css --include ${PROJECT_DIR}/less/coloring.less' \;
+		@echo "Compile config.inc.php..."
+		sed '/Colorsets/ r ${TEMP}/resy_config' <config.inc.php >production/config.inc.php
+
+basestyle:	less/base.less less/coloring.less less/verekia.less
 		@echo "Compiling stylesheet..."
-		${LESSCOMPILER} less/style.less > style.css
+		${LESSCOMPILER} less/base.less production/style.css
 		@echo "Done compiling stylesheet"
 
-#langfiles: 	UTF-8/lang_en.inc.php UTF-8/lang_de.inc.php
-#		@echo "Converting language files from UTF-8 to appropriate code pages..."
-#		${ICONV} --from-code UTF-8 --to-code ASCII UTF-8/lang_en.inc.php --output lang_en.inc.php
-#		${ICONV} -f UTF-8 -t LATIN1 UTF-8/lang_de.inc.php -o lang_de.inc.php
-#		@echo "Done converting language files"
-
-preview: 	style.css index.tpl entries.tpl
-		@echo "Removing image files..."
-		#/bin/rm preview_fullsize.jpg preview.png
+preview: 	production/style.css production/index.tpl production/entries.tpl
+		@echo "Removing preview images"
+		${REMOVE} production/preview_fullsize.jpg production/preview.png
 		@echo "Generating preview images"
 		@echo "Starting webbrowser..."
 		${WEBBROWSER} -new-tab http://127.0.0.1/s9y&
@@ -57,11 +84,11 @@ preview: 	style.css index.tpl entries.tpl
 		$(eval WINDOW_ID = $(shell wmctrl -l | grep $(WMCTRL_SEARCH) | cut -c 1-10))
 		echo Window-id: $(WINDOW_ID)
 		@echo "Generating a screenshot..."
-		import -window $(WINDOW_ID) preview_fullsize.jpg
+		import -window $(WINDOW_ID) production/preview_fullsize.jpg
 		@echo "Removing the webbrowser controls..."
-		mogrify -crop 1006x746+1+127 -gravity NorthWest preview_fullsize.jpg
+		mogrify -crop 1006x746+1+127 -gravity NorthWest production/preview_fullsize.jpg
 		@echo "Creating thumbnail..."
-		convert -resize 100x preview_fullsize.jpg preview.png
+		convert -resize 100x production/preview_fullsize.jpg production/preview.png
 		#@echo "Kill webbrowser..."
 		#wmctrl -c $(WMCTRL_SEARCH)
 

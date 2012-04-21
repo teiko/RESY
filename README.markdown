@@ -6,7 +6,7 @@ RESY is an effort to create a responsive template for the blogging software Sere
 RESY is based upon the Responsive Template (RT) by Jonathan Verrecchia, aka Verekia. The goal of RT is to provide a website-template which can be viewed by all sorts of devices -- from standard PC's to Smartphones. Just try the RT demo yourself!
 
 RESY extends the RT not only by adapting the look & feel of S9Y, but also by providing the underlying Stylesheet in LESS-Syntax. With LESS, a Webdesigner is able to create his Stylesheets with less instructions -- hence the name! 
-When using LESS, the colors of the template can easily get modified by editing the file less/style.less; if you are comfortable with the overall layout of the template, you can leave all other files untouched.
+New colorsets are simply added by editing the colorsets.csv file and compiling the updated sets using "make colorsets".
 
 
 # Usage
@@ -28,6 +28,7 @@ Please have a look at the Makefile.
   - [cloudhead - programmer of LESS](http://cloudhead.io/)
   - [HTML5 Boilerplate -- h5bp](http://www.html5boilerplate.com/)
   - [modernizr.com](http://www.modernizr.com/)
+  - [COLOURlovers](http://www.colourlovers.com/)
 
 
 # Notes

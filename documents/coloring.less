@@ -1,0 +1,46 @@
+// Collection of all instructions that color some part of the HTML
+
+nav a, .serendipity_sideNavigation, .serendipity_title {
+	background: @lightColor;
+}
+
+.content a, #main article a, .serendipity_section_trackbacks, .serendipity_commentsTitle {
+	color: @darkColor;
+}
+
+#header-container, aside {
+	background: @darkColor !important;
+}
+
+#title, #main aside, #footer-container footer, header h2, header h2 a{
+	color: white !important;
+}
+
+header h1, header h1 a, header h1 a:hover, aside h3 {
+	color: @contrastColor;
+}
+
+aside a, aside a:hover {
+	color: @lightColor;
+}
+
+#header-container, #footer-container, #main aside, .serendipity_section_trackbacks, .serendipity_entryFooter {
+	border-color: @lightColor;
+}
+
+.serendipity_comment_source {
+	border-color: white;
+}
+
+.serendipity_comment {
+	background: @contrastColor;
+}
+
+@media only screen and (min-width: 768px) {
+	#header-container,
+	#main aside{
+		-webkit-box-shadow:0 5px 10px @lightColor;
+		   -moz-box-shadow:0 5px 10px @lightColor;
+		        box-shadow:0 5px 10px @lightColor;
+	}
+}
